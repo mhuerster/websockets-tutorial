@@ -14,13 +14,25 @@
 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script>
-      // where our WebSockets logic will go later
+      
+      // MH: I DON'T UNDERSTAND WHAT THIS LINE DOES
       var socket, host;
+
+      // ws schema comes from HTML5
+      // I think this is supposed to connect to the server created in app.rb
       host = "ws://localhost:3001";
 
       function connect() {
         try {
+          
+          // WebSocket is part of HTML5 websockets API
           socket = new WebSocket(host);
+
+          // Ready State Constants - comes from API
+          // 0 -- not yet open
+          // 1 -- open and ready to communicate
+          // 2 -- in the process of closing
+          // 3 -- closed
 
           addMessage("Socket State: " + socket.readyState);
 
@@ -32,6 +44,7 @@
             addMessage("Socket Status: " + socket.readyState + " (closed)");
           }
 
+          // callback fired when data received from server
           socket.onmessage = function(msg) {
             addMessage("Received: " + msg.data);
           }
@@ -52,12 +65,14 @@
         }
 
         try {
+          // send data to server
           socket.send(text);
           addMessage("Sent: " + text)
         } catch(exception) {
           addMessage("Failed To Send")
         }
 
+        // resets input field
         $("#message").val('');
       }
 
