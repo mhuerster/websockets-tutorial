@@ -22,6 +22,8 @@ gem 'faker'
 gem 'bcrypt'
 gem 'bcrypt-ruby'
 
+gem 'em-websocket'
+
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
